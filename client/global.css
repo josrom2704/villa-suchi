@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  
+  :root {
+    
+    --background: 43 58% 97%;
+    --foreground: 25 30% 15%;
+
+    --card: 43 58% 99%;
+    --card-foreground: 25 30% 15%;
+
+    --popover: 43 58% 99%;
+    --popover-foreground: 25 30% 15%;
+
+    --primary: 0 67% 49%;
+    --primary-foreground: 43 58% 97%;
+
+    --secondary: 139 50% 48%;
+    --secondary-foreground: 25 30% 25%;
+
+    --muted: 139 30% 92%;
+    --muted-foreground: 25 20% 45%;
+
+    --accent: 43 90% 92%;
+    --accent-foreground: 25 30% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 43 58% 97%;
+
+    --border: 139 25% 88%;
+    --input: 139 25% 88%;
+    --ring: 0 67% 49%;
+
+    --radius: 1rem;
+
+   
+    --terracotta-50: 0 100% 97%;
+    --terracotta-100: 0 95% 93%;
+    --terracotta-200: 0 85% 86%;
+    --terracotta-300: 0 80% 77%;
+    --terracotta-400: 0 75% 68%;
+    --terracotta-500: 0 67% 49%;
+    --terracotta-600: 0 67% 42%;
+    --terracotta-700: 0 67% 35%;
+    --terracotta-800: 0 67% 28%;
+    --terracotta-900: 0 67% 21%;
+
+  
+    --emerald-50: 139 50% 97%;
+    --emerald-100: 139 50% 93%;
+    --emerald-200: 139 50% 86%;
+    --emerald-300: 139 50% 77%;
+    --emerald-400: 139 50% 68%;
+    --emerald-500: 139 50% 48%;
+    --emerald-600: 139 50% 40%;
+    --emerald-700: 139 50% 32%;
+    --emerald-800: 139 50% 24%;
+    --emerald-900: 139 50% 16%;
+
+    
+    --cream-50: 43 58% 99%;
+    --cream-100: 43 58% 96%;
+    --cream-200: 43 58% 92%;
+    --cream-300: 43 58% 87%;
+    --cream-400: 43 58% 82%;
+    --cream-500: 43 58% 77%;
+    --cream-600: 43 58% 67%;
+    --cream-700: 43 58% 57%;
+    --cream-800: 43 58% 47%;
+    --cream-900: 43 58% 37%;
+
+    
+    --gold-50: 43 100% 97%;
+    --gold-100: 43 100% 93%;
+    --gold-200: 43 100% 86%;
+    --gold-300: 43 100% 77%;
+    --gold-400: 43 100% 68%;
+    --gold-500: 43 100% 48%;
+    --gold-600: 43 100% 40%;
+    --gold-700: 43 100% 32%;
+    --gold-800: 43 100% 24%;
+    --gold-900: 43 100% 16%;
+
+    --indigo-50: 200 29% 97%;
+    --indigo-100: 200 29% 93%;
+    --indigo-200: 200 29% 86%;
+    --indigo-300: 200 29% 77%;
+    --indigo-400: 200 29% 68%;
+    --indigo-500: 200 29% 38%;
+    --indigo-600: 200 29% 32%;
+    --indigo-700: 200 29% 26%;
+    --indigo-800: 200 29% 20%;
+    --indigo-900: 200 29% 14%;
+
+    
+    --orange-50: 33 100% 97%;
+    --orange-100: 33 100% 93%;
+    --orange-200: 33 100% 86%;
+    --orange-300: 33 100% 77%;
+    --orange-400: 33 100% 68%;
+    --orange-500: 33 100% 50%;
+    --orange-600: 33 100% 42%;
+    --orange-700: 33 100% 34%;
+    --orange-800: 33 100% 26%;
+    --orange-900: 33 100% 18%;
+
+ 
+    --earth-50: 20 51% 97%;
+    --earth-100: 20 51% 93%;
+    --earth-200: 20 51% 86%;
+    --earth-300: 20 51% 77%;
+    --earth-400: 20 51% 68%;
+    --earth-500: 20 51% 45%;
+    --earth-600: 20 51% 37%;
+    --earth-700: 20 51% 29%;
+    --earth-800: 20 51% 21%;
+    --earth-900: 20 51% 13%;
+
+    
+    --coffee-50: 20 28% 97%;
+    --coffee-100: 20 28% 93%;
+    --coffee-200: 20 28% 86%;
+    --coffee-300: 20 28% 77%;
+    --coffee-400: 20 28% 68%;
+    --coffee-500: 20 28% 32%;
+    --coffee-600: 20 28% 27%;
+    --coffee-700: 20 28% 22%;
+    --coffee-800: 20 28% 17%;
+    --coffee-900: 20 28% 12%;
+
+ 
+    --pink-50: 354 67% 97%;
+    --pink-100: 354 67% 93%;
+    --pink-200: 354 67% 86%;
+    --pink-300: 354 67% 77%;
+    --pink-400: 354 67% 68%;
+    --pink-500: 354 67% 60%;
+    --pink-600: 354 67% 52%;
+    --pink-700: 354 67% 44%;
+    --pink-800: 354 67% 36%;
+    --pink-900: 354 67% 28%;
+
+    --turquoise-50: 174 100% 97%;
+    --turquoise-100: 174 100% 93%;
+    --turquoise-200: 174 100% 86%;
+    --turquoise-300: 174 100% 77%;
+    --turquoise-400: 174 100% 68%;
+    --turquoise-500: 174 72% 56%;
+    --turquoise-600: 174 72% 48%;
+    --turquoise-700: 174 72% 40%;
+    --turquoise-800: 174 72% 32%;
+    --turquoise-900: 174 72% 24%;
+
+    --sidebar-background: 139 25% 96%;
+    --sidebar-foreground: 25 30% 25%;
+    --sidebar-primary: 0 67% 49%;
+    --sidebar-primary-foreground: 43 58% 97%;
+    --sidebar-accent: 139 25% 92%;
+    --sidebar-accent-foreground: 25 30% 15%;
+    --sidebar-border: 139 25% 88%;
+    --sidebar-ring: 0 67% 49%;
+  }
+
+  .dark {
+    --background: 200 29% 6%;
+    --foreground: 43 58% 95%;
+
+    --card: 200 29% 8%;
+    --card-foreground: 43 58% 95%;
+
+    --popover: 200 29% 8%;
+    --popover-foreground: 43 58% 95%;
+
+    --primary: 0 67% 68%;
+    --primary-foreground: 200 29% 6%;
+
+    --secondary: 139 30% 15%;
+    --secondary-foreground: 43 58% 85%;
+
+    --muted: 139 20% 12%;
+    --muted-foreground: 43 30% 60%;
+
+    --accent: 139 20% 15%;
+    --accent-foreground: 43 58% 95%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 43 58% 95%;
+
+    --border: 139 20% 15%;
+    --input: 139 20% 15%;
+    --ring: 0 67% 68%;
+
+  
+    --terracotta-50: 0 67% 15%;
+    --terracotta-100: 0 67% 20%;
+    --terracotta-200: 0 67% 25%;
+    --terracotta-300: 0 67% 35%;
+    --terracotta-400: 0 67% 45%;
+    --terracotta-500: 0 67% 68%;
+    --terracotta-600: 0 67% 78%;
+    --terracotta-700: 0 67% 83%;
+    --terracotta-800: 0 67% 88%;
+    --terracotta-900: 0 67% 93%;
+
+    --emerald-50: 139 50% 15%;
+    --emerald-100: 139 50% 20%;
+    --emerald-200: 139 50% 25%;
+    --emerald-300: 139 50% 35%;
+    --emerald-400: 139 50% 45%;
+    --emerald-500: 139 50% 55%;
+    --emerald-600: 139 50% 65%;
+    --emerald-700: 139 50% 75%;
+    --emerald-800: 139 50% 85%;
+    --emerald-900: 139 50% 90%;
+
+    --cream-50: 43 58% 12%;
+    --cream-100: 43 58% 18%;
+    --cream-200: 43 58% 25%;
+    --cream-300: 43 58% 35%;
+    --cream-400: 43 58% 45%;
+    --cream-500: 43 58% 55%;
+    --cream-600: 43 58% 65%;
+    --cream-700: 43 58% 75%;
+    --cream-800: 43 58% 85%;
+    --cream-900: 43 58% 90%;
+
+    --gold-50: 43 100% 15%;
+    --gold-100: 43 100% 20%;
+    --gold-200: 43 100% 25%;
+    --gold-300: 43 100% 35%;
+    --gold-400: 43 100% 45%;
+    --gold-500: 43 100% 55%;
+    --gold-600: 43 100% 65%;
+    --gold-700: 43 100% 75%;
+    --gold-800: 43 100% 85%;
+    --gold-900: 43 100% 90%;
+
+    --sidebar-background: 200 29% 6%;
+    --sidebar-foreground: 43 58% 85%;
+    --sidebar-primary: 0 67% 68%;
+    --sidebar-primary-foreground: 200 29% 6%;
+    --sidebar-accent: 139 20% 12%;
+    --sidebar-accent-foreground: 43 58% 85%;
+    --sidebar-border: 139 20% 15%;
+    --sidebar-ring: 0 67% 68%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-terracotta-500 via-gold-500 to-emerald-500 bg-clip-text text-transparent;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+  
+  .luxury-shadow {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  
+  .premium-hover {
+    @apply transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl;
+  }
+
+  .mexican-pattern {
+    background-image: radial-gradient(circle at 1px 1px, rgba(209, 37, 37, 0.15) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+}
+
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fiesta {
+  0%, 100% {
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    filter: hue-rotate(270deg);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-fiesta {
+  animation: fiesta 8s ease-in-out infinite;
+}
