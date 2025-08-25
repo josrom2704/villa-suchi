@@ -8,10 +8,45 @@ interface InteractiveMapProps {
 export default function InteractiveMap({ location, googleMapsUrl }: InteractiveMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
 
+  // Function to create custom marker element
+  const createCustomMarker = () => {
+    const markerElement = document.createElement('div');
+    markerElement.innerHTML = `
+      <div style="
+        width: 32px; 
+        height: 32px; 
+        background: #DC2626; 
+        border-radius: 50% 50% 50% 0; 
+        transform: rotate(-45deg); 
+        border: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        position: relative;
+      ">
+        <div style="
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(45deg);
+          color: white;
+          font-size: 16px;
+          font-weight: bold;
+        ">📍</div>
+      </div>
+    `;
+    return markerElement;
+  };
+
   useEffect(() => {
+    // Check if API key is configured
+    const apiKey = process.env.VITE_GOOGLE_MAPS_API_KEY;
+    if (!apiKey || apiKey === 'YOUR_API_KEY') {
+      console.error('Google Maps API key not configured. Please set VITE_GOOGLE_MAPS_API_KEY in your environment variables.');
+      return;
+    }
+
     // Load Google Maps API
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.VITE_GOOGLE_MAPS_API_KEY || 'YOUR_API_KEY'}&libraries=places`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&loading=async`;
     script.async = true;
     script.defer = true;
     
@@ -32,22 +67,37 @@ export default function InteractiveMap({ location, googleMapsUrl }: InteractiveM
           ]
         });
 
-        // Add marker
-        new window.google.maps.Marker({
-          position: suchitoto,
-          map: map,
-          title: "Villa Suchimex",
-          icon: {
-            url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#DC2626"/>
-              </svg>
-            `),
-            scaledSize: new window.google.maps.Size(32, 32),
-            anchor: new window.google.maps.Point(16, 32)
-          }
-        });
+        // Use the new AdvancedMarkerElement (recommended) or fallback to Marker
+        if (window.google.maps.marker && window.google.maps.marker.AdvancedMarkerElement) {
+          // New recommended way
+          new window.google.maps.marker.AdvancedMarkerElement({
+            position: suchitoto,
+            map: map,
+            title: "Villa Suchimex",
+            content: createCustomMarker()
+          });
+        } else {
+          // Fallback to traditional Marker
+          new window.google.maps.Marker({
+            position: suchitoto,
+            map: map,
+            title: "Villa Suchimex",
+            icon: {
+              url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#DC2626"/>
+                </svg>
+              `),
+              scaledSize: new window.google.maps.Size(32, 32),
+              anchor: new window.google.maps.Point(16, 32)
+            }
+          });
+        }
       }
+    };
+
+    script.onerror = () => {
+      console.error('Failed to load Google Maps API');
     };
 
     document.head.appendChild(script);

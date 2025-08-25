@@ -12,6 +12,19 @@ declare namespace google.maps {
   class Marker {
     constructor(opts?: MarkerOptions);
   }
+
+  namespace marker {
+    class AdvancedMarkerElement {
+      constructor(opts?: AdvancedMarkerOptions);
+    }
+    
+    interface AdvancedMarkerOptions {
+      position?: LatLng | LatLngLiteral;
+      map?: Map;
+      title?: string;
+      content?: HTMLElement;
+    }
+  }
   
   interface MapOptions {
     center?: LatLng | LatLngLiteral;
