@@ -40,59 +40,88 @@ export default function InteractiveMap({ location, googleMapsUrl }: InteractiveM
   const showPreviewMap = () => {
     if (mapRef.current) {
       mapRef.current.innerHTML = `
-        <div class="w-full h-full bg-gradient-to-br from-blue-50 via-gray-50 to-green-50 relative overflow-hidden rounded-xl">
+        <div class="w-full h-full bg-gradient-to-br from-blue-50 via-gray-50 to-green-50 relative overflow-hidden rounded-xl cursor-pointer">
           <!-- Map-like background pattern -->
-          <div class="absolute inset-0 opacity-30">
+          <div class="absolute inset-0 opacity-20">
             <div class="w-full h-full" style="
               background-image: 
                 linear-gradient(90deg, #e5e7eb 1px, transparent 1px),
                 linear-gradient(0deg, #e5e7eb 1px, transparent 1px);
-              background-size: 20px 20px;
+              background-size: 30px 30px;
             "></div>
           </div>
           
-          <!-- Roads -->
-          <div class="absolute top-1/2 left-0 w-full h-1 bg-gray-300 transform -translate-y-1/2"></div>
-          <div class="absolute top-0 left-1/2 w-1 h-full bg-gray-300 transform -translate-x-1/2"></div>
+          <!-- Main roads -->
+          <div class="absolute top-1/2 left-0 w-full h-2 bg-gray-300 transform -translate-y-1/2"></div>
+          <div class="absolute top-0 left-1/2 w-2 h-full bg-gray-300 transform -translate-x-1/2"></div>
           
-          <!-- Buildings/POIs -->
-          <div class="absolute top-1/4 left-1/4 w-8 h-8 bg-gray-400 rounded-sm"></div>
-          <div class="absolute top-1/4 right-1/4 w-6 h-6 bg-gray-400 rounded-sm"></div>
-          <div class="absolute bottom-1/4 left-1/3 w-10 h-8 bg-gray-400 rounded-sm"></div>
-          <div class="absolute bottom-1/3 right-1/3 w-7 h-9 bg-gray-400 rounded-sm"></div>
+          <!-- Secondary roads -->
+          <div class="absolute top-1/4 left-0 w-full h-1 bg-gray-200 transform -translate-y-1/2"></div>
+          <div class="absolute top-3/4 left-0 w-full h-1 bg-gray-200 transform -translate-y-1/2"></div>
+          <div class="absolute top-0 left-1/4 w-1 h-full bg-gray-200 transform -translate-x-1/2"></div>
+          <div class="absolute top-0 left-3/4 w-1 h-full bg-gray-200 transform -translate-x-1/2"></div>
+          
+          <!-- Buildings/POIs with labels -->
+          <div class="absolute top-1/6 left-1/6 w-10 h-8 bg-gray-400 rounded-sm shadow-md">
+            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-600 font-medium">Iglesia</div>
+          </div>
+          <div class="absolute top-1/6 right-1/6 w-8 h-6 bg-gray-400 rounded-sm shadow-md">
+            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-600 font-medium">Plaza</div>
+          </div>
+          <div class="absolute bottom-1/6 left-1/4 w-12 h-10 bg-gray-400 rounded-sm shadow-md">
+            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-600 font-medium">Mercado</div>
+          </div>
+          <div class="absolute bottom-1/4 right-1/4 w-9 h-8 bg-gray-400 rounded-sm shadow-md">
+            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-600 font-medium">Museo</div>
+          </div>
           
           <!-- Water body (Lake Suchitlán) -->
-          <div class="absolute bottom-0 right-0 w-24 h-20 bg-blue-200 rounded-tl-full opacity-60"></div>
+          <div class="absolute bottom-0 right-0 w-28 h-24 bg-blue-200 rounded-tl-full opacity-70 shadow-lg">
+            <div class="absolute top-2 left-2 text-xs text-blue-700 font-medium">Lago Suchitlán</div>
+          </div>
           
-          <!-- Location marker -->
+          <!-- Location marker with clear label -->
           <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div class="w-8 h-8 bg-red-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center animate-pulse">
-              <div class="w-3 h-3 bg-white rounded-full"></div>
+            <div class="w-10 h-10 bg-red-500 rounded-full border-3 border-white shadow-xl flex items-center justify-center animate-pulse">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
             </div>
-            <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-1">
-              <div class="bg-white px-2 py-1 rounded text-xs font-medium text-gray-700 shadow-md whitespace-nowrap">
-                Villa Suchimex
+            <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2">
+              <div class="bg-white px-3 py-2 rounded-lg text-sm font-bold text-gray-800 shadow-lg whitespace-nowrap border border-gray-200">
+                🏠 Villa Suchimex
               </div>
             </div>
           </div>
           
-          <!-- Map controls preview -->
-          <div class="absolute top-4 right-4 bg-white rounded-lg shadow-md p-2">
+          <!-- Interactive map controls -->
+          <div class="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-2 border border-gray-200">
             <div class="space-y-1">
-              <div class="w-8 h-8 bg-gray-100 rounded flex items-center justify-center text-gray-500 text-sm font-bold">+</div>
-              <div class="w-8 h-8 bg-gray-100 rounded flex items-center justify-center text-gray-500 text-sm font-bold">−</div>
+              <div class="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center text-gray-600 text-sm font-bold cursor-pointer transition-colors">+</div>
+              <div class="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center text-gray-600 text-sm font-bold cursor-pointer transition-colors">−</div>
             </div>
           </div>
           
-          <!-- Compass -->
-          <div class="absolute top-4 left-4 bg-white rounded-full w-12 h-12 shadow-md flex items-center justify-center">
-            <div class="w-8 h-8 border-2 border-gray-300 rounded-full relative">
-              <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-0.5 h-4 bg-red-500"></div>
-              <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-4 h-0.5 bg-gray-400"></div>
+          <!-- Compass with clear direction -->
+          <div class="absolute top-4 left-4 bg-white rounded-full w-14 h-14 shadow-lg flex items-center justify-center border border-gray-200">
+            <div class="w-10 h-10 border-2 border-gray-300 rounded-full relative">
+              <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-5 bg-red-500"></div>
+              <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-5 h-1 bg-gray-400"></div>
+              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs text-gray-500 font-bold">N</div>
             </div>
+          </div>
+          
+          <!-- Click instruction -->
+          <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md border border-gray-200">
+            <p class="text-sm text-gray-600 font-medium">💡 Haz clic para ver el mapa real en Google Maps</p>
           </div>
         </div>
       `;
+      
+      // Add click event to make the preview interactive
+      mapRef.current.addEventListener('click', () => {
+        window.open(googleMapsUrl, '_blank');
+      });
     }
   };
 
