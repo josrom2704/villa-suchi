@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useState, useEffect } from "react";
+import InteractiveMap from "@/components/InteractiveMap";
 import {
   MapPin,
   Phone,
@@ -535,26 +536,10 @@ export default function Index() {
             </div>
 
           
-            <Card className="bg-white luxury-shadow premium-hover overflow-hidden">
-              <CardContent className="p-0">
-                <div className="h-96 bg-gradient-to-br from-emerald-100 via-terracotta-50 to-gold-100 rounded-xl flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 opacity-20">
-                    <div className="w-full h-full bg-gradient-to-br from-emerald-200 to-terracotta-200"></div>
-                  </div>
-                  <div className="text-center relative z-10">
-                    <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 luxury-shadow">
-                      <MapPin className="w-10 h-10 text-terracotta-500" />
-                    </div>
-                    <h3 className="text-3xl font-serif font-bold text-terracotta-700 mb-3">Mapa Interactivo</h3>
-                    <p className="text-lg text-gray-600 mb-6">Suchitoto, Cuscatlán, El Salvador</p>
-                    <Button className="bg-gradient-to-r from-terracotta-500 to-emerald-500 hover:from-terracotta-600 hover:to-emerald-600 text-white rounded-xl px-8 py-3 text-lg">
-                      <MapPin className="w-5 h-5 mr-2" />
-                      Ver en Google Maps
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <InteractiveMap 
+              location="Suchitoto, Cuscatlán, El Salvador"
+              googleMapsUrl="https://maps.app.goo.gl/uyxDeDh2oJQn5VYR9"
+            />
           </div>
         </div>
       </section>
